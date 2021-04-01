@@ -1,5 +1,7 @@
 /// <reference types="Cypress" />
 
+const { element } = require("prop-types");
+
 context('login', () => {
     beforeEach(() => {
         cy.visit('https://atleta.teste.goatme.app/');
@@ -32,11 +34,59 @@ context('login', () => {
                 $el.on('click', () => { })
                 console.log(texto)
                 cy.wrap($el).click()
+                
+                return false
             }
 
         })
-        cy.get('.dGKTlf').click({ multiple: true, force: true })
-
+        cy.get('.dGKTlf').contains('Avançar').click({force:true})
+        cy.wait(500)
+        /* cy.get('#app > section > div > div.form-login > form:nth-child(4) > div:nth-child(3)')
+        .then(()=>{
+            cy.get('#app > section > div > div.form-login > form:nth-child(4) > div:nth-child(3) > form > input:nth-child(2)')
+            .type('romulo comin cardozo')
+            cy.get('#app > section > div > div.form-login > form:nth-child(4) > div:nth-child(3) > form > input:nth-child(3)')
+            .type('@romulocc')
+            cy.get('#app > section > div > div.form-login > form:nth-child(4) > div:nth-child(3) > form > input:nth-child(4)')
+            .type('romuloccardozo@gmail.com')
+            cy.get('#app > section > div > div.form-login > form:nth-child(4) > div:nth-child(3) > form > input:nth-child(5)')
+            .type('romuloccardozo@gmail.com')
+       
+            cy.get("[type='password']").each(($el, index)=>{
+                cy.log($el.attr('placeholder', "ssss"))
+                
+                if(index == 2|| index == 3) cy.wrap($el).type('123321')
+            
+            })
+        })
+        */
+        cy.get('#app > section > div > div.form-login > form:nth-child(4) > div:nth-child(3) > form > label:nth-child(10) > input[type=checkbox]')
+        .check("1", {force:true})
+        cy.get('#app > section > div > div.form-login > form:nth-child(4) > div:nth-child(3) > form > label:nth-child(11) > input[type=checkbox]')
+        .check("1", {force:true}).then(()=>{
+            cy.get('#app > section > div > div.form-login > form:nth-child(4) > div:nth-child(4) > form > input:nth-child(2)')
+            .type('romulo comin cardozo')
+            cy.get('#app > section > div > div.form-login > form:nth-child(4) > div:nth-child(4) > form > input:nth-child(3)')
+            .type('@rqqqomulocc')
+            cy.get('#app > section > div > div.form-login > form:nth-child(4) > div:nth-child(4) > form > input:nth-child(4)')
+            .type('rqqqomuloccardozo@gmail.com')
+            cy.get('#app > section > div > div.form-login > form:nth-child(4) > div:nth-child(4) > form > input:nth-child(5)')
+            .type('rqqqomuloccardozo@gmail.com')
+       
+            cy.get("[type='password']").each(($el, index)=>{
+                
+                if(index == 4|| index == 5)  cy.wrap($el).type('123321') 
+            
+            })
+            cy.get('#app > section > div > div.form-login > form:nth-child(4) > div:nth-child(4) > form > button')
+            .contains('Cadastrar').click({force:true}).then(()=>{
+                cy.wait(2000)
+            })
+            
+            cy.get('[type="phone"]').type('55555555555')
+            cy.get('#sign-in-button').click({force:true})
+        })
+        //cy.get('.checkmark').click({force:true})
     });
 
 });
